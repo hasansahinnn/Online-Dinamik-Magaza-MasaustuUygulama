@@ -1,0 +1,3 @@
+CREATE CLUSTERED INDEX Ýndex3 ON kullanici(kullaniciAd);
+CREATE NONCLUSTERED INDEX Ýndex1 ON Kargo(kargoID);
+CREATE UNIQUE INDEX Ýndex2 ON Satis (satisID);

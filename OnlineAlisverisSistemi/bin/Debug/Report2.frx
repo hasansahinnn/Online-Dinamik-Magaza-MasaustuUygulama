@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="12/22/2018 14:35:53" ReportInfo.Modified="12/27/2018 04:56:06" ReportInfo.CreatorVersion="2018.4.18.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using System.Data.Sql;
+using System.Data.SqlClient;
+
+namespace FastReport
+{ 
+   public class ReportScript
+  {
+    
+   
+
+    private void btnCancel_Click(object sender, EventArgs e)
+    {
+      
+    }
+
+    private void Form1_Load(object sender, EventArgs e)
+    {
+      
+    }
+
+    private void Child3_Click(object sender, EventArgs e)
+    {
+      
+    }
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqM7gJFg/iaLrqMhRfGy5lGkBEYMQbqeyXtwdEdrZGQHk3BMFzHqSzP8SFbdA/I/RKcaM7CgSXd28i39xsVnmK+BXCMgFoS2XS6s8tjjMbB5pnLKRV6RJuVR/tjPr/QMWmEamT7ltEdUtMSbwAt9F83mci+sKbfcntPP2Y+ArtPAZ62A7rt4HNZRtoDNIHwPG7VAeqGtMvS8JD52wAo3yPmg==">
+      <TableDataSource Name="Urun" DataType="System.Int32" Enabled="true" TableName="Urun">
+        <Column Name="urunID" DataType="System.Int32"/>
+        <Column Name="urunAdi" DataType="System.String"/>
+        <Column Name="urunFiyat" DataType="System.Decimal"/>
+      </TableDataSource>
+      <TableDataSource Name="Stok" DataType="System.Int32" Enabled="true" TableName="Stok">
+        <Column Name="stokID" DataType="System.Int32"/>
+        <Column Name="urunAdet" DataType="System.Int32"/>
+      </TableDataSource>
+      <TableDataSource Name="Kullanici" DataType="System.Int32" Enabled="true" TableName="Kullanici">
+        <Column Name="kullaniciID" DataType="System.Int32"/>
+        <Column Name="kullaniciTC" DataType="System.String"/>
+        <Column Name="kullaniciAd" DataType="System.String"/>
+        <Column Name="kullaniciSoyad" DataType="System.String"/>
+        <Column Name="kullaniciTel" DataType="System.String"/>
+        <Column Name="kullaniciNick" DataType="System.String"/>
+        <Column Name="kullaniciSifre" DataType="System.String"/>
+        <Column Name="kullaniciMail" DataType="System.String"/>
+        <Column Name="kullaniciAdres" DataType="System.String"/>
+        <Column Name="Bakiye" DataType="System.Decimal"/>
+      </TableDataSource>
+      <TableDataSource Name="Yetki" DataType="System.Int32" Enabled="true" TableName="Yetki">
+        <Column Name="yetkiID" DataType="System.Int32"/>
+        <Column Name="okuma" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="silme" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="guncelleme" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="yazma" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="adminYetki" DataType="System.Boolean" BindableControl="CheckBox"/>
+      </TableDataSource>
+      <TableDataSource Name="Satis" DataType="System.Int32" Enabled="true" TableName="Satis">
+        <Column Name="satisID" DataType="System.Int32"/>
+        <Column Name="kullaniciID" DataType="System.Int32"/>
+        <Column Name="Satisaciklama" DataType="System.String"/>
+        <Column Name="satisTarih" DataType="System.DateTime"/>
+        <Column Name="toplamTutar" DataType="System.Decimal"/>
+        <Column Name="SatisIade" DataType="System.String"/>
+      </TableDataSource>
+      <TableDataSource Name="Kargo" DataType="System.Int32" Enabled="true" TableName="Kargo">
+        <Column Name="kargoID" DataType="System.Int32"/>
+        <Column Name="kargoDurum" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <MsSqlDataConnection Name="Connection1" ConnectionString="rijcmlqM7gJFg/iaLrqMhRfGy5lGkBEYMQbqeyXtwdEdrZGQHk3BMFzHqSzP8SFbdA/I/RKcaM7CgSXd28i39xsVnmK+BXCMgFoS2XS6s8tjjMbB5pnLKRV6RJuVR/tjPr/QMWmEamT7ltEdUtMSbwAt9F83mci+sKbfcntPP2Y+ArtPAZ62A7rt4HNZRtoDNIHwPG7kZXGYDdtT8K4ytcA5nABwA==">
+      <TableDataSource Name="Urun1" DataType="System.Int32" Enabled="true" TableName="Urun">
+        <Column Name="urunID" DataType="System.Int32"/>
+        <Column Name="urunAdi" DataType="System.String"/>
+        <Column Name="urunFiyat" DataType="System.Decimal"/>
+      </TableDataSource>
+      <TableDataSource Name="Stok1" DataType="System.Int32" Enabled="true" TableName="Stok">
+        <Column Name="stokID" DataType="System.Int32"/>
+        <Column Name="urunAdet" DataType="System.Int32"/>
+      </TableDataSource>
+      <TableDataSource Name="Kullanici1" DataType="System.Int32" Enabled="true" TableName="Kullanici">
+        <Column Name="kullaniciID" DataType="System.Int32"/>
+        <Column Name="kullaniciTC" DataType="System.String"/>
+        <Column Name="kullaniciAd" DataType="System.String"/>
+        <Column Name="kullaniciSoyad" DataType="System.String"/>
+        <Column Name="kullaniciTel" DataType="System.String"/>
+        <Column Name="kullaniciNick" DataType="System.String"/>
+        <Column Name="kullaniciSifre" DataType="System.String"/>
+        <Column Name="kullaniciMail" DataType="System.String"/>
+        <Column Name="kullaniciAdres" DataType="System.String"/>
+        <Column Name="Bakiye" DataType="System.Decimal"/>
+      </TableDataSource>
+      <TableDataSource Name="Yetki1" DataType="System.Int32" Enabled="true" TableName="Yetki">
+        <Column Name="yetkiID" DataType="System.Int32"/>
+        <Column Name="okuma" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="silme" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="guncelleme" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="yazma" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="adminYetki" DataType="System.Boolean" BindableControl="CheckBox"/>
+      </TableDataSource>
+      <TableDataSource Name="Satis1" DataType="System.Int32" Enabled="true" TableName="Satis">
+        <Column Name="satisID" DataType="System.Int32"/>
+        <Column Name="kullaniciID" DataType="System.Int32"/>
+        <Column Name="Satisaciklama" DataType="System.String"/>
+        <Column Name="satisTarih" DataType="System.DateTime"/>
+        <Column Name="toplamTutar" DataType="System.Decimal"/>
+        <Column Name="SatisIade" DataType="System.String"/>
+      </TableDataSource>
+      <TableDataSource Name="Kargo1" DataType="System.Int32" Enabled="true" TableName="Kargo">
+        <Column Name="kargoID" DataType="System.Int32"/>
+        <Column Name="kargoDurum" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="Parameter" DataType="System.String"/>
+    <Parameter Name="Parameter1" DataType="System.String"/>
+    <Parameter Name="Parameter2" DataType="System.String"/>
+    <Parameter Name="Parameter3" DataType="System.String"/>
+    <Parameter Name="Parameter4" DataType="System.String"/>
+  </Dictionary>
+  <ReportPage Name="Page2">
+    <ReportTitleBand Name="ReportTitle2" Width="718.2" Height="9.45" Fill.Color="Silver"/>
+    <PageHeaderBand Name="PageHeader1" Top="13.45" Width="718.2" Height="28.35" Fill.Color="Silver">
+      <TextObject Name="Text2" Left="94.5" Top="9.45" Width="94.5" Height="18.9" Text="Ürün ID"/>
+      <TextObject Name="Text4" Left="245.7" Top="9.45" Width="94.5" Height="18.9" Text="Ürün ADI"/>
+      <TextObject Name="Text6" Left="415.8" Top="9.45" Width="94.5" Height="18.9" Text="urunFiyat"/>
+    </PageHeaderBand>
+    <DataBand Name="Data4" Top="45.8" Width="718.2" Height="47.25" Fill.Color="Silver" DataSource="Urun">
+      <TextObject Name="Text1" Left="94.5" Top="18.9" Width="113.4" Height="28.35" Text="[Urun.urunID]"/>
+      <TextObject Name="Text3" Left="245.7" Top="18.9" Width="132.3" Height="28.35" Text="[Urun.urunAdi]"/>
+      <TextObject Name="Text5" Left="415.8" Top="18.9" Width="122.85" Height="28.35" Text="[Urun.urunFiyat]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <Sort>
+        <Sort Expression="[Urun.urunID]"/>
+        <Sort Expression="[Urun.urunAdi]"/>
+        <Sort Expression="[Urun.urunFiyat]"/>
+      </Sort>
+    </DataBand>
+  </ReportPage>
+</Report>

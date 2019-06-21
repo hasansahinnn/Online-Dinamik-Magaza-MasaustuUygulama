@@ -1,0 +1,18 @@
+create trigger [dbo].[Urunsil]  
+on [dbo].[Urun]  
+instead of  delete   
+as  
+declare @urunStok int
+declare @urnid int 
+select @urnid=urunID from deleted 
+select @urunStok= urunadet from Stok
+delete from Stok where stokID=@urnid     
+declare @urunAd varchar(50)
+declare @urunFiyat money
+select @urunAd= urunAdi from deleted
+select @urunFiyat = urunFiyat  from deleted
+
+insert into [SilinmisUrunVerileri] values(@urnid,@urunAd,@urunFiyat,@urunStok)
+delete from Urun where urunID=@urnid
+delete from Stok where stokID=@urnid
+GO

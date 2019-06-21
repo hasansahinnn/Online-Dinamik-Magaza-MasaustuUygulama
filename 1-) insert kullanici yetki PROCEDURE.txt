@@ -1,0 +1,20 @@
+create procedure InsertYetkiKul
+@kultc char(11),
+@kulad varchar(15),
+@kulsoyad varchar(15),
+@kultel char(11),
+@kulnick varchar(10),
+@kulsifre varchar(10),
+@kulmail varchar(50)
+AS
+declare @deger int
+declare @string varchar(20) ='NULL'
+declare @mony money=500.00
+insert into Kullanici values(@kultc,@kulad,@kulsoyad,
+                            @kultel,@kulnick,@kulsifre,
+							@kulmail,@string,@mony)
+select @deger=[kullaniciID] from Kullanici order by [kullaniciID] asc
+
+
+
+GO

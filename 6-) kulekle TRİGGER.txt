@@ -1,0 +1,9 @@
+CREATE trigger kullaniciac
+on kullanici
+after insert
+as
+declare @id int
+select @id=KullaniciID from inserted
+insert into yetki values(@id,0,0,0,0,0)
+
+go

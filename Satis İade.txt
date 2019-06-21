@@ -1,0 +1,44 @@
+create proc uruniade
+@degisken varchar(255),
+
+@satisID int
+as
+
+
+DECLARE @MyCursor CURSOR;
+
+DECLARE @urunID int;
+
+DECLARE @urunAdet int;
+
+
+BEGIN
+    SET @MyCursor = CURSOR FOR
+    
+SELECT * FROM dbo.splitstring(@degisken)
+     
+        
+
+    OPEN @MyCursor 
+   
+   
+ WHILE @@FETCH_STATUS = 0
+   
+ BEGIN
+	 print(@urunID)
+    
+  FETCH NEXT FROM @MyCursor 
+   
+   INTO @urunID 
+	
+  FETCH NEXT FROM @MyCursor 
+  
+    INTO @urunAdet 
+	 
+ update Stok set urunAdet=urunAdet+@urunAdet where stokID=@urunID
+	 
+    END; update kargo set kargoDurum='Kargo iptal Edilmiþtir.' where kargoID=@satisID
+    CLOSE @MyCursor ;
+   
+ DEALLOCATE @MyCursor;
+END;

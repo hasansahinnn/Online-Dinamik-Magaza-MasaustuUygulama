@@ -1,0 +1,8 @@
+create procedure urunislemleri
+@urnid int,
+@urunfiyat money,
+@urunadet int
+as
+update urun set urunFiyat=@urunfiyat where urunID=@urnid
+update stok set urunAdet=@urunadet where stokID=@urnid
+go

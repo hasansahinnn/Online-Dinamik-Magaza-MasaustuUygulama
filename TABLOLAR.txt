@@ -1,0 +1,66 @@
+create database onlinemagaza
+use onlinemagaza
+Create Table Urun (
+urunID int identity(1,1) primary key not null,
+urunAdi varchar(20) not null,
+urunFiyat money
+)
+Create Table Stok(
+stokID int foreign key references Urun(urunID) on update cascade on delete cascade not null,
+urunAdet int 
+)
+
+
+Create table Kullanici(
+kullaniciID int identity(1,1) primary key not null,
+kullaniciTC varchar(11) UNIQUE,
+kullaniciAd varchar(20),
+kullaniciSoyad varchar(20),
+kullaniciTel varchar(11) UNIQUE,
+kullaniciNick varchar(30),
+kullaniciSifre varchar(30),
+kullaniciMail varchar(30) UNIQUE,
+kullaniciAdres varchar(60),
+Bakiye money  default(500)
+)
+
+
+
+Create table Yetki(
+yetkiID int foreign key references Kullanici(kullaniciID) on update cascade on delete cascade not null,
+okuma bit default(0),
+silme bit default(0),
+guncelleme bit default(0),
+yazma bit default(0),
+adminYetki bit default(0),
+)
+Create table Satis(
+satisID int identity(1,1) primary key  not null,
+kullaniciID int foreign key references Kullanici(kullaniciID) on update cascade on delete cascade not null,
+Satisaciklama varchar(120),
+satisTarih date default(getdate()),
+toplamTutar money,
+SatisIade varchar(200)
+)
+create table Kargo(
+kargoID int identity(1,1) foreign key references Satis(satisID) on update cascade on delete cascade not null,
+kargoDurum varchar(40)
+)
+create table SilinmisUrunVerileri(
+urunID int not null,
+urunAD varchar(50),
+urunFiyat money,
+urunStok int
+)
+
+
+ALTER TABLE Kullanici ADD Constraint ck_kullaniTel check (kullaniciTel like '0[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
+ALTER TABLE Kullanici ADD Constraint ck_kullaniciMail check (kullaniciMail like ('%@%'))
+ALTER TABLE Kullanici ADD Constraint ck_kullaniTc Check(kullaniciTC LIKE '[^0][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][02468]')
+
+ALTER TABLE Satis ADD Constraint ck_satisTarih check(satisTarih =getdate())
+ALTER TABLE Satis ADD Constraint ck_toplamTutar check(toplamTutar > 0)
+
+ALTER TABLE Stok ADD Constraint ck_urunAdet check(urunAdet >= 0)
+
+ALTER TABLE Urun ADD Constraint ck_urunFiyat check(urunFiyat > 0)

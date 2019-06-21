@@ -1,0 +1,10 @@
+create procedure UrunEkle
+@urunAd varchar(15),
+@stok int ,
+@fiyat money
+as
+declare @id tinyint
+insert into Urun values(@urunAd,@fiyat)
+select @id= urunID from Urun order by urunID asc
+insert into stok values(@id,@stok)
+go
