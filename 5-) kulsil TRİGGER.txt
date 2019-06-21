@@ -1,8 +1,0 @@
-create TRIGGER kulsil 
-ON kullanici	
-instead of delete
-as
-declare @id int
-select @id=kullaniciID from deleted
-delete from yetki where yetkiID=@id
-go
